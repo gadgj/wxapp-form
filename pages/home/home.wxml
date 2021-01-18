@@ -2,7 +2,7 @@
 
 <view class="root">
   <view class="info">
-    <image class="logo" src="https://pub-files.jinshuju.net/di/20180829204414_b4e6b7"></image>
+    <image class="logo" src="cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/logo.png"></image>
     <view>★ 请根据"学分卡情况"办理学分卡（新卡40元工本费，补卡30元工本费，所收费用均转至华医网，办理时限大概为1~2个月，新卡补卡办好之后教研部会通知个人到503取卡），如果办理学分卡调入，需联系原单位调出，再联系教研部调入。有问题请联系8896。 此表收集的所有信息仅用于学分卡办理。    
     </view>
   </view>
