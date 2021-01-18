@@ -70,7 +70,7 @@ Page({
         */
         // completeTime:true, //显示完整时间, 包含时分秒
         config: {
-          endDate: true,
+          endDate: false,///true,
           dateLimit: true,
           // initStartTime: "2020-01-01 12:32:44",
           // initEndTime: "2020-12-01 12:32:44",
@@ -103,7 +103,7 @@ Page({
         maxSize: 5,
         isRequired: true,
         fileList: [
-          { url: 'https://img.yzcdn.cn/vant/leaf.jpg', name: '图片1' }//初始图片
+          ///{ url: 'https://img.yzcdn.cn/vant/leaf.jpg', name: '图片1' }//初始图片
         ]
       },
       {
@@ -123,6 +123,55 @@ Page({
   },
   onFormSubmit(e){
     console.log('表单提交: ', e);
+
+    wx.showLoading({
+      title: '提交中...',
+    });
+
+
+    var imgPath = e.detail.pics.list[0].path;
+    var cloudPath = "kingImg/" + imgPath.substring(imgPath.lastIndexOf('/') + 1);
+    ///上传到云存储
+    wx.cloud.uploadFile({
+      cloudPath: cloudPath,
+      filePath: e.detail.pics.list[0].path
+    }).then(res=>{
+      console.log("授权文件上传成功: ", res);
+      var fileId = res.fileID;
+
+      ///////////  更新数据库  ///////////////
+      wx.cloud.callFunction({
+        name:'formsubmit',
+        data: {
+          ipt1: e.detail.ipt1.value,
+          email: e.detail.email.value,
+          num: e.detail.num.value,
+          picker2: e.detail.picker2.original.range[e.detail.picker2.idx],
+          pics: fileId
+        },
+        success: res => {
+          wx.hideLoading()
+          console.log('提交成功', res)
+        },
+        fail: err => {
+          wx.hideLoading()
+          wx.showToast({
+            icon: 'error',
+            title: '网络不给力....'
+          })
+          console.error('发布失败', err)
+        }
+      });
+
+    }).catch(err=>{
+      wx.showToast({
+        title: '上传文件错误',
+        icon: 'error',        
+      });
+      console.log(err);
+
+    });    
+    
   },
   onFormChange(e){
     console.log('表单变化: ',e);
