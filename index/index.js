@@ -266,7 +266,11 @@ Page({
             },
             success: res => {
               wx.hideLoading()
-              console.log('提交成功', res)
+              console.log('提交成功', res);
+              wx.showToast({
+                title: '提交成功',
+                icon: 'success'
+              })
             },
             fail: err => {
               wx.hideLoading()
