@@ -327,8 +327,10 @@ Page({
   onLoad: function (para) {
     console.log(para);
     if(para.tapId == "xinKa") {
-      console.log('新卡，无学分卡字段');
-      this.data.formData = this.data.formData.filter(({id}) => id !== 'xueFenKa');
+      console.log('新卡，无学分卡字段');      
+      this.setData({
+        formData : this.data.formData.filter(({id}) => id !== 'xueFenKa')
+      });
       console.log(this.data.formData);
     }
     else if(para.tapId == "buKa") {
@@ -337,6 +339,10 @@ Page({
     }
     else {
       console.log('调入，');
+      const daioRuYuansu = {'xingMing':1, 'zhiCheng':1, 'pingDingShiJian':1, 'pinRenNianDu': 1, 'keShi': 1, 'zhuanYe': 1, 'shouJi': 1, 'xueFenKa':1,}
+      this.setData({
+        formData : this.data.formData.filter(({id}) => id in daioRuYuansu)
+      });
     }
-  },
+  }
 })
