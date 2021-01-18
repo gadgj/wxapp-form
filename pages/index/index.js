@@ -248,72 +248,87 @@ Page({
       title: '提交中...',
     });
 
+    ////// 弹出赞赏码确认
+    // wx.hideLoading();
+    // wx.previewImage({
+    //   current: '',
+    //   urls: ['cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/lfy赞赏码.jpg'],
+    // });
+    ///return;
 
-    var imgPath = e.detail.tuPian.list[0].path;
-    var cloudPath = "kingImg/" + imgPath.substring(imgPath.lastIndexOf('/') + 1);
-    ///上传到云存储
-    wx.cloud.uploadFile({
-      cloudPath: cloudPath,
-      filePath: e.detail.tuPian.list[0].path,
-      success: res => {
-        console.log("图片上传成功: ", res);
-        var fileId = res.fileID;
-
-        ///////////  更新数据库  ///////////////
-        try{
-          wx.cloud.callFunction({
-            name:'formsubmit',
-            data: {
-              idcard: e.detail.idcard.value,
-              xingMing: e.detail.xingMing.value,
-              xingBie: e.detail.xingBie.original.range[e.detail.xingBie.idx].name,
-              zhiCheng: e.detail.zhiCheng.original.range[e.detail.zhiCheng.idx].name,          
-              pingDingShiJian: e.detail.pingDingShiJian.startDate,
-              pinRenNianDu: e.detail.pinRenNianDu.value,
-              keShi: e.detail.keShi.original.range[e.detail.keShi.idx].name,
-              zhuanYe: e.detail.zhuanYe.original.range[e.detail.zhuanYe.idx].name,
-              shouJi: e.detail.shouJi.value,
-              xueFenKa: e.detail.xueFenKa.value,
-              youXiang: e.detail.youXiang.value,
-              tuPian: fileId,
-              beiZhu: e.detail.beiZhu.value
-            },
-            success: res => {
-              wx.hideLoading()
-              console.log('提交成功', res);
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success'
-              })
-            },
-            fail: err => {
-              wx.hideLoading()
-              wx.showToast({
-                icon: 'error',
-                title: '网络不给力....'
-              })
-              console.error('发布失败', err)
-            },
-            complete: res => {
-              console.log(res);
-            }
+    if(e.detail.tuPian)
+    {
+      var imgPath = e.detail.tuPian.list[0].path;
+      var cloudPath = "kingImg/" + imgPath.substring(imgPath.lastIndexOf('/') + 1);
+      ///上传到云存储
+      wx.cloud.uploadFile({
+        cloudPath: cloudPath,
+        filePath: imgPath,
+        success: res => {
+          console.log("图片上传成功: ", res);
+          var fileId = res.fileID;
+          this.addDb(e, fileId);          
+        },
+        fail: err => {
+          // handle error
+          wx.showToast({
+            title: '上传图片错误',
+            icon: 'error',        
           });
-        } catch(ex) {
-          console.log(ex);
-        };
-        
-      },
-      fail: err => {
-        // handle error
-        wx.showToast({
-          title: '上传图片错误',
-          icon: 'error',        
-        });
-        console.log(err);
-      }
+          console.log(err);
+        }
 
-    });    
+      });
+    }
+    else {
+      this.addDb(e, undefined);
+    }
     
+    
+  },
+  addDb: function(e, fileId) {
+    ///////////  更新数据库  ///////////////
+    try{
+      wx.cloud.callFunction({
+        name:'formsubmit',
+        data: {
+          idcard: e.detail.idcard && e.detail.idcard.value,
+          xingMing: e.detail.xingMing && e.detail.xingMing.value,
+          xingBie: e.detail.xingBie && e.detail.xingBie.original.range[e.detail.xingBie.idx].name,
+          zhiCheng: e.detail.zhiCheng && e.detail.zhiCheng.original.range[e.detail.zhiCheng.idx].name,          
+          pingDingShiJian: e.detail.pingDingShiJian && e.detail.pingDingShiJian.startDate,
+          pinRenNianDu: e.detail.pinRenNianDu && e.detail.pinRenNianDu.value,
+          keShi: e.detail.keShi && e.detail.keShi.original.range[e.detail.keShi.idx].name,
+          zhuanYe: e.detail.zhuanYe && e.detail.zhuanYe.original.range[e.detail.zhuanYe.idx].name,
+          shouJi: e.detail.shouJi && e.detail.shouJi.value,
+          xueFenKa: e.detail.xueFenKa && e.detail.xueFenKa.value,
+          youXiang: e.detail.youXiang && e.detail.youXiang.value,
+          tuPian: fileId,
+          beiZhu: e.detail.beiZhu && e.detail.beiZhu.value
+        },
+        success: res => {
+          wx.hideLoading()
+          console.log('提交成功', res);
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success'
+          });              
+        },
+        fail: err => {
+          wx.hideLoading()
+          wx.showToast({
+            icon: 'error',
+            title: '网络不给力....'
+          })
+          console.error('发布失败', err)
+        },
+        complete: res => {
+          console.log(res);
+        }
+      });
+    } catch(ex) {
+      console.log(ex);
+    };
   },
   onFormChange(e){
     console.log('表单变化: ',e);
