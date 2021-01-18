@@ -5,11 +5,11 @@ Page({
     formData: [
       {
         type: 'input',
-        id:'ipt1',
-        lable:'长标题长标题长标题',
+        id:'idcard',
+        lable:'身份证号',
         isRequired: true,//是否必填
         maxLength: 20,//最大长度
-        defaultValue:'巡检计划',//初始值
+        placeholder:'请填写身份证号码',//初始值
         rules:[//规则验证数组
           {
             regular: '^\\S*$',//正则字符串
@@ -19,51 +19,67 @@ Page({
       },
       {
         type: 'input',
-        id: 'email',
-        lable: '邮箱',
-        placeholder: '请填写邮箱',
-        rules: [
+        id:'xingMing',
+        lable:'姓名',
+        isRequired: true,//是否必填
+        maxLength: 8,//最大长度
+        placeholder:'请填写姓名',//初始值
+        rules:[//规则验证数组
           {
-            regular: '^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$',
-            tips: '邮箱格式错误'
-          }
-        ]
-      },
-      {
-        type: 'input',
-        id: 'num',
-        lable: '数字',
-        defaultValue:'禁用',
-        inputType: 'digit', //对应input组件type值(text,number)
-        placeholder: '请填写数字',
-        disabled:true,
-        rules: [
-          
+            regular: '^\\S*$',//正则字符串
+            tips: '不能有空格'//错误提示
+          },
         ]
       },
       {
         type: 'picker',
-        id: 'picker2',
-        lable: '状态',
+        id: 'xingBie',
+        lable: '性别',
         defaultIdx:0,//默认选择索引
-        disabled:true,
+        disabled:false,
         isRequired:true,
         range:[
           {
             id: 0,
-            name: '正常'
+            name: '男'
           },
           {
             id: 1,
-            name: '异常'
+            name: '女'
           },
         
         ]
       },
       {
+        type: 'picker',
+        id: 'zhiCheng',
+        lable: '当前职称',
+        defaultIdx:0,//默认选择索引
+        disabled:false,
+        isRequired:true,
+        range:[
+          {
+            id: 0,
+            name: '医师系列'
+          },
+          {
+            id: 1,
+            name: '护理系列'
+          },
+          {
+            id: 2,
+            name: '药师系列'
+          },
+          {
+            id: 3,
+            name: '技师系列'
+          }        
+        ]
+      },
+      {
         type: 'date',
-        id: 'timePicker',
-        lable: '日期',
+        id: 'pingDingShiJian',
+        lable: '职称评定时间',
         isRequired: true,
         /* 显示完整时间包含时分秒；当使用endDate的时候关闭,不要同时打开, 否则日期将会换行；
            与config中的colum属性共同设置
@@ -75,29 +91,104 @@ Page({
           // initStartTime: "2020-01-01 12:32:44",
           // initEndTime: "2020-12-01 12:32:44",
           column: "day",//day、hour、minute、secend
-          limitStartTime: "2000-01-01 00:00:59",
-          limitEndTime: "2100-01-01 00:00:59"
+          limitStartTime: "1950-01-01 00:00:59",
+          limitEndTime: "2050-01-01 00:00:59"
         }
       },
       {
-        type: 'textarea',
-        id: 'textarea1',
-        lable: '描述',
-        isRequired: true,
-        maxLength: 200,
-        // defaultValue: '初始值',
-        placeholder:'请输入描述',
+        type: 'input',
+        id: 'pinRenNianDu',
+        lable: '职称聘任年度',
+        isRequired: true,//是否必填
+        defaultValue:'2020',
+        inputType: 'digit', //对应input组件type值(text,number)
+        placeholder: '请填写职称聘任年度',
+        disabled:false,
+        rules: [
+          
+        ]
+      },
+      {
+        type: 'picker',
+        id: 'keShi',
+        lable: '科室',
+        defaultIdx:0,//默认选择索引
+        disabled:false,
+        isRequired:true,
+        range:[
+          {
+            id: 0,
+            name: '护理科'
+          },
+          {
+            id: 1,
+            name: '心血管科'
+          },
+          {
+            id: 2,
+            name: '呼吸内科'
+          },
+          {
+            id: 3,
+            name: '消化内科'
+          }        
+        ]
+      },
+      {
+        type: 'picker',
+        id: 'zhuanYe',
+        lable: '专业',
+        defaultIdx:0,//默认选择索引
+        disabled:false,
+        isRequired:true,
+        range:[
+          {
+            id: 0,
+            name: '护理学'
+          },
+          {
+            id: 1,
+            name: '临床医学'
+          },
+          {
+            id: 2,
+            name: '急救医学'
+          },
+          {
+            id: 3,
+            name: '预防医学'
+          }        
+        ]
+      },
+      {
+        type: 'input',
+        id: 'shouJi',
+        lable: '手机',
+        isRequired: true,//是否必填
+        defaultValue:'',
+        inputType: 'digit', //对应input组件type值(text,number)
+        placeholder: '请填写手机号码',
+        disabled:false,
+        rules: [
+          
+        ]
+      },
+      {
+        type: 'input',
+        id: 'youXiang',
+        lable: '邮箱',
+        placeholder: '请填写邮箱',
         rules: [
           {
-            regular: '^.{5,200}$',
-            tips: '请输入5-200位以内字符'
+            regular: '^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$',
+            tips: '邮箱格式错误'
           }
         ]
       },
       {
         type: 'file',
         accept: 'image',
-        id: 'pics',
+        id: 'tuPian',
         lable: '图片上传',
         maxCount: 5,
         maxSize: 5,
@@ -105,19 +196,35 @@ Page({
         fileList: [
           ///{ url: 'https://img.yzcdn.cn/vant/leaf.jpg', name: '图片1' }//初始图片
         ]
-      },
+      },  
       {
-        type: 'file',
-        accept: 'video',
-        id: 'video',
-        lable: '视频上传',
-        maxCount: 1,
-        maxSize: 5,
-        // isRequired: true,
-        fileList: [
-          // { url: "http://tmp/wx4c198b0bd87f5470.o6zAJs1Ghz_xnqKSRnUi….xVILGkr0x8fm00dec98217739f2e6813a5937b68f928.mp4",isVideo:true}
+        type: 'textarea',
+        id: 'beiZhu',
+        lable: '备注',
+        isRequired: false,
+        maxLength: 200,
+        // defaultValue: '初始值',
+        placeholder:'请输入备注',
+        rules: [
+          {
+            regular: '^.{5,200}$',
+            tips: '请输入5-200位以内字符'
+          }
         ]
-      },
+      }
+      // ,
+      // {
+      //   type: 'file',
+      //   accept: 'video',
+      //   id: 'video',
+      //   lable: '视频上传',
+      //   maxCount: 1,
+      //   maxSize: 5,
+      //   // isRequired: true,
+      //   fileList: [
+      //     // { url: "http://tmp/wx4c198b0bd87f5470.o6zAJs1Ghz_xnqKSRnUi….xVILGkr0x8fm00dec98217739f2e6813a5937b68f928.mp4",isVideo:true}
+      //   ]
+      // },
     ],
     toSubmit: Math.random()
   },
@@ -129,46 +236,63 @@ Page({
     });
 
 
-    var imgPath = e.detail.pics.list[0].path;
+    var imgPath = e.detail.tuPian.list[0].path;
     var cloudPath = "kingImg/" + imgPath.substring(imgPath.lastIndexOf('/') + 1);
     ///上传到云存储
     wx.cloud.uploadFile({
       cloudPath: cloudPath,
-      filePath: e.detail.pics.list[0].path
-    }).then(res=>{
-      console.log("授权文件上传成功: ", res);
-      var fileId = res.fileID;
+      filePath: e.detail.tuPian.list[0].path,
+      success: res => {
+        console.log("图片上传成功: ", res);
+        var fileId = res.fileID;
 
-      ///////////  更新数据库  ///////////////
-      wx.cloud.callFunction({
-        name:'formsubmit',
-        data: {
-          ipt1: e.detail.ipt1.value,
-          email: e.detail.email.value,
-          num: e.detail.num.value,
-          picker2: e.detail.picker2.original.range[e.detail.picker2.idx],
-          pics: fileId
-        },
-        success: res => {
-          wx.hideLoading()
-          console.log('提交成功', res)
-        },
-        fail: err => {
-          wx.hideLoading()
-          wx.showToast({
-            icon: 'error',
-            title: '网络不给力....'
-          })
-          console.error('发布失败', err)
-        }
-      });
-
-    }).catch(err=>{
-      wx.showToast({
-        title: '上传文件错误',
-        icon: 'error',        
-      });
-      console.log(err);
+        ///////////  更新数据库  ///////////////
+        try{
+          wx.cloud.callFunction({
+            name:'formsubmit',
+            data: {
+              idcard: e.detail.idcard.value,
+              xingMing: e.detail.xingMing.value,
+              xingBie: e.detail.xingBie.original.range[e.detail.xingBie.idx].name,
+              zhiCheng: e.detail.zhiCheng.original.range[e.detail.zhiCheng.idx].name,          
+              pingDingShiJian: e.detail.pingDingShiJian.startDate,
+              pinRenNianDu: e.detail.pinRenNianDu.value,
+              keShi: e.detail.keShi.original.range[e.detail.keShi.idx].name,
+              zhuanYe: e.detail.zhuanYe.original.range[e.detail.zhuanYe.idx].name,
+              shouJi: e.detail.shouJi.value,
+              youXiang: e.detail.youXiang.value,
+              tuPian: fileId,
+              beiZhu: e.detail.beiZhu.value
+            },
+            success: res => {
+              wx.hideLoading()
+              console.log('提交成功', res)
+            },
+            fail: err => {
+              wx.hideLoading()
+              wx.showToast({
+                icon: 'error',
+                title: '网络不给力....'
+              })
+              console.error('发布失败', err)
+            },
+            complete: res => {
+              console.log(res);
+            }
+          });
+        } catch(ex) {
+          console.log(ex);
+        };
+        
+      },
+      fail: err => {
+        // handle error
+        wx.showToast({
+          title: '上传图片错误',
+          icon: 'error',        
+        });
+        console.log(err);
+      }
 
     });    
     

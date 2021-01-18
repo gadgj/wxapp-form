@@ -10,7 +10,7 @@ exports.main = async(event, context) => {
     return await
     console.log("event", event),
       //新增数据add
-      db.collection('groupdata').add({
+      db.collection('xfkbl').add({
         // data: {
         //   time: event.time,
         //   home_county: event.home_county,
