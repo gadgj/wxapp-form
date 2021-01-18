@@ -1,0 +1,24 @@
+/* pages/home/home.wxss */
+.root {
+  margin: 25rpx;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 150rpx;
+  height: 150rpx;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 5rpx;
+  height: 350rpx;
+  justify-content: space-around;
+}
+.btn {
+  width: 90% !important;
+}

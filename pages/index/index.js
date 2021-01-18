@@ -175,6 +175,19 @@ Page({
       },
       {
         type: 'input',
+        id: 'xueFenKa',
+        lable: '华医网学分卡号',
+        isRequired: true,//是否必填
+        defaultValue:'',
+        inputType: 'digit', //对应input组件type值(text,number)
+        placeholder: '请填写华医网学分卡号',
+        disabled:false,
+        rules: [
+          
+        ]
+      },
+      {
+        type: 'input',
         id: 'youXiang',
         lable: '邮箱',
         placeholder: '请填写邮箱',
@@ -260,6 +273,7 @@ Page({
               keShi: e.detail.keShi.original.range[e.detail.keShi.idx].name,
               zhuanYe: e.detail.zhuanYe.original.range[e.detail.zhuanYe.idx].name,
               shouJi: e.detail.shouJi.value,
+              xueFenKa: e.detail.xueFenKa.value,
               youXiang: e.detail.youXiang.value,
               tuPian: fileId,
               beiZhu: e.detail.beiZhu.value
@@ -310,7 +324,19 @@ Page({
       toSubmit: Math.random()
     })
   },
-  onLoad: function () {
-    
+  onLoad: function (para) {
+    console.log(para);
+    if(para.tapId == "xinKa") {
+      console.log('新卡，无学分卡字段');
+      this.data.formData = this.data.formData.filter(({id}) => id !== 'xueFenKa');
+      console.log(this.data.formData);
+    }
+    else if(para.tapId == "buKa") {
+      console.log('补卡，字段最多，不处理');
+
+    }
+    else {
+      console.log('调入，');
+    }
   },
 })

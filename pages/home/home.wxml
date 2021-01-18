@@ -1,0 +1,19 @@
+<!--pages/home/home.wxml-->
+
+<view class="root">
+  <view class="info">
+    <image class="logo" src="https://pub-files.jinshuju.net/di/20180829204414_b4e6b7"></image>
+    <view>★ 请根据"学分卡情况"办理学分卡（新卡40元工本费，补卡30元工本费，所收费用均转至华医网，办理时限大概为1~2个月，新卡补卡办好之后教研部会通知个人到503取卡），如果办理学分卡调入，需联系原单位调出，再联系教研部调入。有问题请联系8896。 此表收集的所有信息仅用于学分卡办理。    
+    </view>
+  </view>
+  <view>
+    ★ 办卡的同时请在<a herf="http://gdrst.gdhrss.gov.cn/publicfiles/business/htmlfiles/jxjyglxt/index.html">广东省专业技术人员继续教育管理系统</a>注册后通知教研部确认，如果在原单位已注册则需变更单位为深圳大学总医院。
+  </view>
+</view>
+
+<view class="btns">
+  <button type="primary" class="btn" bindtap="toTap" id="xinKa">没有华医网学分卡则需办理新卡</button>
+  <button type="primary" class="btn" bindtap="toTap" id="buKa">华医网学分卡丢失则需补卡</button>
+  <button type="primary" class="btn" bindtap="toTap" id="diaoRu">有华医网学分卡需办理调入</button>
+</view>
+
