@@ -239,7 +239,8 @@ Page({
       //   ]
       // },
     ],
-    toSubmit: Math.random()
+    toSubmit: Math.random(),    
+    tapId: ''
   },
   onFormSubmit(e){
     console.log('表单提交: ', e);
@@ -292,6 +293,7 @@ Page({
       wx.cloud.callFunction({
         name:'formsubmit',
         data: {
+          tapId: this.data.tapId,
           idcard: e.detail.idcard && e.detail.idcard.value,
           xingMing: e.detail.xingMing && e.detail.xingMing.value,
           xingBie: e.detail.xingBie && e.detail.xingBie.original.range[e.detail.xingBie.idx].name,
@@ -344,18 +346,22 @@ Page({
     if(para.tapId == "xinKa") {
       console.log('新卡，无学分卡字段');      
       this.setData({
+        tapId: para.tapId,
         formData : this.data.formData.filter(({id}) => id !== 'xueFenKa')
       });
       console.log(this.data.formData);
     }
     else if(para.tapId == "buKa") {
       console.log('补卡，字段最多，不处理');
-
+      this.setData({
+        tapId: para.tapId
+      })
     }
     else {
       console.log('调入，');
       const daioRuYuansu = {'xingMing':1, 'zhiCheng':1, 'pingDingShiJian':1, 'pinRenNianDu': 1, 'keShi': 1, 'zhuanYe': 1, 'shouJi': 1, 'xueFenKa':1,}
       this.setData({
+        tapId: para.tapId,
         formData : this.data.formData.filter(({id}) => id in daioRuYuansu)
       });
     }
