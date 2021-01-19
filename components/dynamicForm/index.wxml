@@ -35,8 +35,8 @@
         <view style="width:100%">
           <view wx:if="{{!item.disabled}}" class="picker-row {{item.disabled?'disabled':''}}">
             <picker class="field" range="{{multi_pickerMap[item.id].multi_range}}" disabled="{{item.disabled}}" id="{{item.id}}" value="{{multi_pickerMap[item.id].multi_idx}}"
-              range-key="name" bindchange="onMultiPickerChange" bindcolumnchange="onMultiPickerColumnChange" mode="multiSelector">
-              {{multi_pickerMap[item.id].hasChoose?multi_pickerMap[item.id].multi_range[0][multi_pickerMap[item.id].multi_idx[0]].name + ' / ' + multi_pickerMap[item.id].multi_range[1][multi_pickerMap[item.id].multi_idx[1]].name:'请选择'}}
+              bindchange="onMultiPickerChange" bindcolumnchange="onMultiPickerColumnChange" mode="multiSelector">
+              {{multi_pickerMap[item.id].hasChoose?multi_pickerMap[item.id].multi_range[0][multi_pickerMap[item.id].multi_idx[0]] + ' / ' + multi_pickerMap[item.id].multi_range[1][multi_pickerMap[item.id].multi_idx[1]]:'请选择'}}
             </picker>
             <van-icon class="row-icon" name="arrow"></van-icon>
           </view>
