@@ -92,7 +92,7 @@ Component({
           original: val,
           hasChoose: hasDefault,
           error:null,
-          multi_idx: val.defaultIdx || [],
+          multi_idx: val.defaultIdx || [0, 0],
           multi_range: val.multi_range,//修改列值后动态根据y_range更新其值--King
           y_range: val.y_range,
           data: hasDefault ? val.multi_range[0][val.defaultIdx[0]] + ' / ' + val.multi_range[1][val.defaultIdx[1]] : '请选择'//记录选择的值 --King 2021.01.20
