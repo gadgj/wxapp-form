@@ -21,11 +21,11 @@
           <view wx:if="{{!item.disabled}}" class="picker-row {{item.disabled?'disabled':''}}">
             <picker class="field" range="{{item.range}}" disabled="{{item.disabled}}" id="{{item.id}}" value="{{pickerMap[item.id].idx}}"
               bindchange="onPickerChange">
-              {{pickerMap[item.id].hasChoose?item.range[pickerMap[item.id].idx]:'请选择'}}
+              {{pickerMap[item.id].data}}
             </picker>
             <van-icon class="row-icon" name="arrow"></van-icon>
           </view>
-          <view class="field disabled" wx:else>{{pickerMap[item.id].hasChoose?item.range[pickerMap[item.id].idx].name:''}}</view>
+          <view class="field disabled" wx:else>{{pickerMap[item.id].data}}</view>
           <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{pickerMap[item.id].error}}</view>
         </view>
       </view>
@@ -36,12 +36,12 @@
           <view wx:if="{{!item.disabled}}" class="picker-row {{item.disabled?'disabled':''}}">
             <picker class="field" range="{{multi_pickerMap[item.id].multi_range}}" disabled="{{item.disabled}}" id="{{item.id}}" value="{{multi_pickerMap[item.id].multi_idx}}"
               bindchange="onMultiPickerChange" bindcolumnchange="onMultiPickerColumnChange" mode="multiSelector">
-              {{multi_pickerMap[item.id].hasChoose?multi_pickerMap[item.id].multi_range[0][multi_pickerMap[item.id].multi_idx[0]] + ' / ' + multi_pickerMap[item.id].multi_range[1][multi_pickerMap[item.id].multi_idx[1]]:'请选择'}}
+              {{multi_pickerMap[item.id].data}}
             </picker>
             <van-icon class="row-icon" name="arrow"></van-icon>
           </view>
-          <view class="field disabled" wx:else>{{pickerMap[item.id].hasChoose?item.multi_range[pickerMap[item.id].multi_idx].name:''}}</view>
-          <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{pickerMap[item.id].error}}</view>
+          <view class="field disabled" wx:else>{{multi_pickerMap[item.id].data}}</view>
+          <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{multi_pickerMap[item.id].error}}</view>
         </view>
       </view>
       <!-- 日期选择器 -->

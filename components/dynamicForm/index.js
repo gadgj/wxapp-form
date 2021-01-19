@@ -81,7 +81,8 @@ Component({
           original: val,
           hasChoose: val.defaultIdx != 'undefined',
           error:null,
-          idx: val.defaultIdx || 0
+          idx: val.defaultIdx || 0,
+          data:'请选择'//记录选择的值 --King 2021.01.20
         };
       });
       multi_pickers.forEach(val => {
@@ -91,7 +92,8 @@ Component({
           error:null,
           multi_idx: val.defaultIdx || 0,
           multi_range: val.multi_range,//修改列值后动态根据y_range更新其值--King
-          y_range: val.y_range
+          y_range: val.y_range,
+          data:'请选择'//记录选择的值 --King 2021.01.20
         };
       });
       files.forEach(val => {
@@ -186,7 +188,7 @@ Component({
               [`fileMap.${i}`]: info
             });
           }
-        } else if (info.original.type === 'picker' || info.original.type === 'date'){
+        } else if (info.original.type === 'picker' || info.original.type === 'multi_picker' || info.original.type === 'date'){
           if (!info.hasChoose && info.original.isRequired){
             info.error = '请选择' + info.original.lable;
             hasError = true;
@@ -273,22 +275,24 @@ Component({
         picker.hasChoose = true;
         picker.error = null;
       }
+      const pickObj = this.data.pickers.filter(val => val.id === id)[0];
       picker.idx = e.detail.value;
-      picker.data = this.data.pickers.filter(val => val.id === id)[0].range[e.detail.value];
+      picker.data = pickObj.range[e.detail.value];
       this.updateData(`pickerMap.${e.target.id}`, picker);
     },
     //multi_picker确定选择 --add by King 2021.01.19
     onMultiPickerChange(e) {
       console.log('picker发送选择改变，携带值为', e.detail.value);///各列行号eg:[0,1]
-      const [column1, column2] = e.detail.value;
+      const [column0, column1] = e.detail.value;
       const { id } = e.target;
       const picker = this.data.multi_pickerMap[id];
       if(!picker.hasChoose){
         picker.hasChoose = true;
         picker.error = null;
       }
+      const pickObj = this.data.multi_pickers.filter(val => val.id === id)[0];
       picker.multi_idx = e.detail.value;
-      picker.data = this.data.multi_pickers.filter(val => val.id === id)[0].multi_range[column1][column2];
+      picker.data = pickObj.multi_range[0][column0] + ' / ' + pickObj.multi_range[1][column1];
       this.updateData(`multi_pickerMap.${e.target.id}`, picker);
     },
     //multi_picker修改列 --add by King 2021.01.19
