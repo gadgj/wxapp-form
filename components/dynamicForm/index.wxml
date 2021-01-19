@@ -20,8 +20,8 @@
         <view style="width:100%">
           <view wx:if="{{!item.disabled}}" class="picker-row {{item.disabled?'disabled':''}}">
             <picker class="field" range="{{item.range}}" disabled="{{item.disabled}}" id="{{item.id}}" value="{{pickerMap[item.id].idx}}"
-              range-key="name" bindchange="onPickerChange">
-              {{pickerMap[item.id].hasChoose?item.range[pickerMap[item.id].idx].name:'请选择'}}
+              bindchange="onPickerChange">
+              {{pickerMap[item.id].hasChoose?item.range[pickerMap[item.id].idx]:'请选择'}}
             </picker>
             <van-icon class="row-icon" name="arrow"></van-icon>
           </view>
