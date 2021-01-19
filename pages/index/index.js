@@ -57,7 +57,7 @@ Page({
         defaultIdx:[0, 0],//默认选择索引
         disabled:false,
         isRequired:true,
-        multi_range:[//存储所有范围值，初始化为首个分支，同时第一个元素数组作为x轴x_range
+        multi_range:[//存储x轴和某个y轴，初始化为第一个x轴＋第一个y_range --King 2021.01.19
           [
             {
               id: 0,
@@ -87,7 +87,7 @@ Page({
           [
             {
               id: 1,
-              name: ''
+              name: '16计科一'
             },
             {
               id: 2,
