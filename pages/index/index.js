@@ -35,7 +35,7 @@ Page({
         type: 'picker',
         id: 'xingBie',
         lable: '性别',
-        defaultIdx:0,//默认选择索引
+        ///defaultIdx:0,//默认选择索引
         disabled:false,
         isRequired:true,
         range:['男','女']
@@ -44,7 +44,7 @@ Page({
         type: 'multi_picker',
         id: 'zhiCheng',
         lable: '当前职称',
-        defaultIdx:[0, 0],//默认选择索引
+        ///defaultIdx:[0, 0],//默认选择索引
         disabled:false,
         isRequired:true,
         multi_range:[//存储x轴和某个可变的y轴，初始化为第一个x轴＋第一个y轴y_range[0] --King 2021.01.19
@@ -107,7 +107,7 @@ Page({
         type: 'picker',
         id: 'keShi',
         lable: '科室',
-        defaultIdx:0,//默认选择索引
+        ///defaultIdx:0,//默认选择索引
         disabled:false,
         isRequired:true,
         range:['护理科','心血管科','呼吸内科','消化内科','肾内科','神经内科','血液内科','内分泌科','风湿免疫科','精神科','血液肿瘤科','脊柱骨病科','普外科','心胸外科','肝胆外科','泌尿外科','神经外科','烧伤整形外科','妇产科','儿科','急诊科','重症医学科','口腔科','耳鼻喉科','眼科','皮肤科','感染科','中医科','康复科','麻醉科','超声科','影像科','体检科','药学部','输血科','病理科','医务部','后勤保障部','财务部','信息技术部','全科','医学工程部','医院感染控制科','人力资源部','其他','关节创伤外科']
@@ -116,7 +116,7 @@ Page({
         type: 'multi_picker',
         id: 'zhuanYe',
         lable: '专业',
-        defaultIdx:[0,0],//默认选择索引
+        ///defaultIdx:[0,0],//默认选择索引
         disabled:false,
         isRequired:true,
         multi_range:[
