@@ -51,6 +51,70 @@ Page({
         ]
       },
       {
+        type: 'multi_picker',
+        id: 'test',
+        lable: '班别',
+        defaultIdx:[0, 0],//默认选择索引
+        disabled:false,
+        isRequired:true,
+        multi_range:[//存储所有范围值，初始化为首个分支，同时第一个元素数组作为x轴x_range
+          [
+            {
+              id: 0,
+              name: '计算机科学与技术类'
+            },
+            {
+              id: 1,
+              name: '电气信息类'
+            }
+          ],
+          [
+            {
+              id: 2,
+              name: '16计科一'
+            },
+            {
+              id: 3,
+              name: '17计科一'
+            },
+            {
+              id: 4,
+              name: '18计科一'
+            }
+          ]
+        ],
+        y_range: [//y轴
+          [
+            {
+              id: 1,
+              name: ''
+            },
+            {
+              id: 2,
+              name: '17计科一'
+            },
+            {
+              id: 3,
+              name: '18计科一'
+            }            
+          ],
+          [
+            {
+              id: 4,
+              name: '16电器一'
+            },
+            {
+              id: 5,
+              name: '17电器一'
+            },
+            {
+              id: 6,
+              name: '18电器一'
+            }
+          ]
+        ]
+      },
+      {
         type: 'picker',
         id: 'zhiCheng',
         lable: '当前职称',

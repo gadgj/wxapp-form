@@ -52,12 +52,15 @@ Component({
     //表单初始化
     formInit() {
 
-      const pickerMap = {}, fileMap = {}, inputMap = {}, dateMap = {};//存储各表单变化后的值,表单id为索引
-      const pickers = [], files = [], inputs = [], datePickers = [];
+      const pickerMap = {}, multi_pickerMap = {}, fileMap = {}, inputMap = {}, dateMap = {};//存储各表单变化后的值,表单id为索引
+      const pickers = [], multi_pickers = [], files = [], inputs = [], datePickers = [];
       this.data.formData.forEach(val => {
         switch (val.type) {
           case 'picker':
             pickers.push(val);
+            break;
+          case 'multi_picker':
+            multi_pickers.push(val);
             break;
           case 'file':
             files.push(val);
@@ -79,6 +82,16 @@ Component({
           hasChoose: val.defaultIdx != 'undefined',
           error:null,
           idx: val.defaultIdx || 0
+        };
+      });
+      multi_pickers.forEach(val => {
+        multi_pickerMap[val.id] = {
+          original: val,
+          hasChoose: val.defaultIdx != 'undefined',
+          error:null,
+          multi_idx: val.defaultIdx || 0,
+          multi_range: val.multi_range,//修改列值后动态根据y_range更新其值--King
+          y_range: val.y_range
         };
       });
       files.forEach(val => {
@@ -118,10 +131,12 @@ Component({
       });
       this.setData({
         pickers,
+        multi_pickers,
         inputs,
         datePickers,
         files,
         pickerMap,
+        multi_pickerMap,
         inputMap,
         fileMap,
         dateMap
@@ -261,6 +276,35 @@ Component({
       picker.idx = e.detail.value;
       picker.data = this.data.pickers.filter(val => val.id === id)[0].range[e.detail.value];
       this.updateData(`pickerMap.${e.target.id}`, picker);
+    },
+    //multi_picker确定选择 --add by King 2021.01.19
+    onMultiPickerChange(e) {
+      console.log('picker发送选择改变，携带值为', e.detail.value);///各列行号eg:[0,1]
+      const [column1, column2] = e.detail.value;
+      const { id } = e.target;
+      const picker = this.data.multi_pickerMap[id];
+      if(!picker.hasChoose){
+        picker.hasChoose = true;
+        picker.error = null;
+      }
+      picker.multi_idx = e.detail.value;
+      picker.data = this.data.multi_pickers.filter(val => val.id === id)[0].multi_range[column1][column2];
+      this.updateData(`multi_pickerMap.${e.target.id}`, picker);
+    },
+    //multi_picker修改列 --add by King 2021.01.19
+    onMultiPickerColumnChange(e){
+      console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+      const { id } = e.target;
+      const picker = this.data.multi_pickerMap[id];
+      var data = {
+        multi_range: picker.multi_range,
+        multi_idx: picker.multi_idx
+      };
+      data.multi_idx[e.detail.column] = e.detail.value;
+      if(e.detail.column < data.multi_range.length - 1) {///下一列的值要取y_range更新multi_range --King 2021.01.19
+        data.multi_range[e.detail.column + 1] = picker.y_range[e.detail.value];
+      }
+      this.updateData(`multi_pickerMap.${e.target.id}`, picker);///绑定刷新
     },
     // 选择文件
     onFileRead(e) {

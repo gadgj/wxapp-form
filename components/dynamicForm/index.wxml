@@ -29,6 +29,21 @@
           <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{pickerMap[item.id].error}}</view>
         </view>
       </view>
+      <!-- multi_picker选择器 add by King 2021.01.19-->
+      <view class="form-row flex-start" wx:elif="{{item.type==='multi_picker'}}">
+        <view class="form-lable {{item.isRequired?'required':''}}">{{item.lable}}</view>
+        <view style="width:100%">
+          <view wx:if="{{!item.disabled}}" class="picker-row {{item.disabled?'disabled':''}}">
+            <picker class="field" range="{{item.multi_range}}" disabled="{{item.disabled}}" id="{{item.id}}" value="{{multi_pickerMap[item.id].multi_idx}}"
+              range-key="name" bindchange="onMultiPickerChange" bindcolumnchange="onMultiPickerColumnChange" mode="multiSelector">
+              {{multi_pickerMap[item.id].hasChoose?multi_pickerMap[item.id].multi_range[0][multi_pickerMap[item.id].multi_idx[0]].name + ' / ' + multi_pickerMap[item.id].multi_range[1][multi_pickerMap[item.id].multi_idx[1]].name:'请选择'}}
+            </picker>
+            <van-icon class="row-icon" name="arrow"></van-icon>
+          </view>
+          <view class="field disabled" wx:else>{{pickerMap[item.id].hasChoose?item.multi_range[pickerMap[item.id].multi_idx].name:''}}</view>
+          <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{pickerMap[item.id].error}}</view>
+        </view>
+      </view>
       <!-- 日期选择器 -->
       <view class="form-row flex-start " wx:elif="{{item.type==='date'}}">
         <view class="form-lable {{item.isRequired?'required':''}}">{{item.lable}}</view>
