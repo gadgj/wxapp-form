@@ -77,23 +77,25 @@ Component({
         }
       });
       pickers.forEach(val => {
+        const hasDefault = val.defaultIdx != undefined;
         pickerMap[val.id] = {
           original: val,
-          hasChoose: val.defaultIdx != 'undefined',
+          hasChoose: hasDefault,
           error:null,
           idx: val.defaultIdx || 0,
-          data:'请选择'//记录选择的值 --King 2021.01.20
+          data: hasDefault ? val.range[val.defaultIdx] : '请选择'//记录选择的值 --King 2021.01.20
         };
       });
       multi_pickers.forEach(val => {
+        const hasDefault = val.defaultIdx != undefined;
         multi_pickerMap[val.id] = {
           original: val,
-          hasChoose: val.defaultIdx != 'undefined',
+          hasChoose: hasDefault,
           error:null,
-          multi_idx: val.defaultIdx || 0,
+          multi_idx: val.defaultIdx || [],
           multi_range: val.multi_range,//修改列值后动态根据y_range更新其值--King
           y_range: val.y_range,
-          data:'请选择'//记录选择的值 --King 2021.01.20
+          data: hasDefault ? val.multi_range[0][val.defaultIdx[0]] + ' / ' + val.multi_range[1][val.defaultIdx[1]] : '请选择'//记录选择的值 --King 2021.01.20
         };
       });
       files.forEach(val => {

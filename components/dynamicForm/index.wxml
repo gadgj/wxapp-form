@@ -41,7 +41,7 @@
             <van-icon class="row-icon" name="arrow"></van-icon>
           </view>
           <view class="field disabled" wx:else>{{multi_pickerMap[item.id].data}}</view>
-          <view class="error-info" wx:if="{{pickerMap[item.id].error}}">{{multi_pickerMap[item.id].error}}</view>
+          <view class="error-info" wx:if="{{multi_pickerMap[item.id].error}}">{{multi_pickerMap[item.id].error}}</view>
         </view>
       </view>
       <!-- 日期选择器 -->
