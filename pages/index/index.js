@@ -182,8 +182,8 @@ Page({
         accept: 'image',
         id: 'tuPian',
         lable: '一寸彩照电子版',
-        maxCount: 5,
-        maxSize: 5,
+        maxCount: 1,//最大数量、张
+        maxSize: 5,//最大大小、MB
         isRequired: true,
         fileList: [
           ///{ url: 'https://img.yzcdn.cn/vant/leaf.jpg', name: '图片1' }//初始图片
