@@ -1,0 +1,3 @@
+{"_id":"xinKa","name":"40元","pic":"","price":"2","timestamp":{"$date":"2020-08-31T17:30:00.882Z"}}
+{"_id":"buKa","name":"30元","pic":"","price":"1","timestamp":{"$date":"2020-08-31T17:30:00.882Z"}}
+{"_id":"diaoRu","name":"100元","pic":"","price":"1","timestamp":{"$date":"2020-08-31T17:30:00.882Z"}}

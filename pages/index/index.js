@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+const regeneratorRuntime = require('../../utils/runtime');
 
 Page({
   data: {
@@ -267,6 +268,7 @@ Page({
     
   },
   addDb: function(e, fileId) {
+    const that = this;
     ///////////  更新数据库  ///////////////
     try{
       wx.cloud.callFunction({
@@ -287,13 +289,50 @@ Page({
           tuPian: fileId,
           beiZhu: e.detail.beiZhu && e.detail.beiZhu.value
         },
-        success: res => {
+        async success(res) {
           wx.hideLoading()
           console.log('提交成功', res);
           wx.showToast({
             title: '提交成功',
             icon: 'success'
-          });              
+          });
+
+          ////////////  下单支付   ////////////////////
+          const subscribedTmplId = '';
+
+          const id = that.data.tapId;
+
+          try {
+            const {result} = await wx.cloud.callFunction({
+              name: 'pay-v2',
+              data: {
+                ///corpname: app.globalData.cardInfo.rows[0].corpname,
+                type: 'unifiedorder',
+                data: {
+                  goodId: id,
+                  subscribedTmplId,
+                  ///cardInfo: app.globalData.cardInfo.rows[0]
+                }
+              }
+            });
+
+            console.log(result);
+
+            const data = result.data
+
+            wx.hideLoading();
+            wx.navigateTo({
+              url: `../pay-result/index?id=${data.outTradeNo}`
+            })
+          } catch (err) {
+            console.log(err);
+            wx.hideLoading()
+            wx.showToast({
+              title: '下单失败，请重试',
+              icon: 'none'
+            })
+          };
+          ////////////  下单支付  END ////////////////////
         },
         fail: err => {
           wx.hideLoading()
