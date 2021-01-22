@@ -220,7 +220,8 @@ Page({
       // },
     ],
     toSubmit: Math.random(),    
-    tapId: ''
+    tapId: '',
+    hasSubmit: false
   },
   onFormSubmit(e){
     console.log('表单提交: ', e);
@@ -297,6 +298,13 @@ Page({
             icon: 'success'
           });
 
+          //////////////////改为客服消息下单了
+          that.setData({
+            hasSubmit: true
+          });
+          return;
+          //////////////////改为客服消息下单了 --add by King
+
           ////////////  下单支付   ////////////////////
           const subscribedTmplId = '';
 
@@ -354,10 +362,15 @@ Page({
     console.log('表单变化: ',e);
   },
   //变更数值, 触发表单提交事件
-  toSubmitChange(){
+  toSubmitChange(e){
+    console.log(e);
     this.setData({
       toSubmit: Math.random()
     })
+  },
+  handleContact (e) {
+    console.log(e.detail.path)
+    console.log(e.detail.query)
   },
   onLoad: function (para) {
     console.log(para);

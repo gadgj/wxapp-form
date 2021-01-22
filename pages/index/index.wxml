@@ -1,3 +1,5 @@
 <d-form formData="{{formData}}" showSubmitBtn="{{false}}" toSubmit="{{toSubmit}}" bind:dynamicFormChange="onFormChange" bind:dynamicFormSubmit="onFormSubmit"></d-form>
 
-<button bindtap="toSubmitChange" style="background: lightblue;">下一步</button>
+
+<button wx:if="{{!hasSubmit}}" bindtap="toSubmitChange" style="background: lightblue;">提交</button>
+<button wx:else open-type="contact" bindcontact="handleContact" style="background: lightblue;">下一步</button>
