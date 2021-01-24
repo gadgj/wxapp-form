@@ -41,9 +41,10 @@ async function handleEnterEvent(event) {
 }
 
 ///下载云存储图片  --add by King 2021.01.23
-let downLoad = async(event, context) => {
+let downLoad = async(tapId) => {
+    const fileId = tapId == 'xinKa' ? 'cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/zye40.png' : 'cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/zye30.png';
     const res = await cloud.downloadFile({
-        fileID: 'cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/zye40.png', // 图片的File ID
+        fileID: fileId, // 图片的File ID
     })
     const buffer = res.fileContent
     console.log(buffer)
@@ -62,8 +63,8 @@ let upload = async(Buffer) => {
 }
 
 async function handleEnterEvent_King(event) {
-  console.log(event);
-  const { FromUserName } = event;
+  console.log('---------------------------------------进入发送收款码方法！\n');
+  const FromUserName = event.userInfo.openId;///const { FromUserName } = event;
 
   const reply_txt = {
     touser: FromUserName,
@@ -72,22 +73,28 @@ async function handleEnterEvent_King(event) {
       content: `您好，已收到你提交的表单，请扫码支付办卡费用，完成办理申请。`
     }
   }
-  await cloud.openapi.customerServiceMessage.send(reply_txt)
+  await cloud.openapi.customerServiceMessage.send(reply_txt);
 
+  sendShouKuanMa(event);
+}
+
+async function sendShouKuanMa(event) {
   ////发送收款码
-  let Buffer = await downLoad()
-  let meida = await upload(Buffer)
-  // console.log(meida)
+  let Buffer = await downLoad(event.tapId);
+  let meida = await upload(Buffer);
+  console.log(meida);
   try {
       const result = await cloud.openapi.customerServiceMessage.send({
-          touser: FromUserName,
+          touser: event.userInfo.openId,
           "msgtype": "image",
           "image": {
               "media_id": meida.mediaId
           }
       });
+      console.log('-----------------------------发送收款码结果\n', result);
       return result;
   } catch (err) {
+      console.log(err);
       return err;
   }
 }
@@ -267,14 +274,14 @@ async function handleTextMsgWithTBPBotSample(event) {
 }
 
 exports.main = async (event, context) => {
-  console.log(event, context);
+  console.log(event);
   let result
 
   switch (event.MsgType) {
     case MSG_TYPES.event:
-      if (event.Event === 'user_enter_tempsession') {
-        result = await handleEnterEvent_King(event);///await handleEnterEvent(event);
-      }
+      // if (event.Event === 'user_enter_tempsession') {
+      //   result = await handleEnterEvent_King(event);///await handleEnterEvent(event);
+      // }
       break;
   
    case MSG_TYPES.miniprogrampage:
@@ -292,6 +299,10 @@ exports.main = async (event, context) => {
 
     default:
       break;
+  }
+
+  if(event.tapId) {
+    result = await handleEnterEvent_King(event);//主动调用会话云函数
   }
 
   return result ? result : 'success'

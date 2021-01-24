@@ -312,11 +312,18 @@ Page({
           // });
 
           //////////////////改为客服消息下单了
-          that.setData({
-            hasSubmit: true,
-            showModal: true,
-            modalMessage: '提交成功'
-          });
+          if(that.data.tapId == 'diaoRu') {
+            wx.showToast({
+              title: '申请完成',
+              icon: 'success'
+            });
+          } else {
+            that.setData({
+              hasSubmit: true,
+              showModal: true,
+              modalMessage: '提交成功'
+            });
+          }          
           return;
           //////////////////改为客服消息下单了 --add by King
 
@@ -384,8 +391,21 @@ Page({
     })
   },
   handleContact (e) {
-    console.log(e.detail.path)
-    console.log(e.detail.query)
+    console.log(e.detail.path);
+    console.log(e.detail.query);
+    if(this.data.tapId != 'diaoRu') {
+      wx.cloud.callFunction({
+        name: 'customerMessage',
+        data: {
+          tapId: this.data.tapId
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.error(err)
+      });
+    }
+    
   },
   onLoad: function (para) {
     console.log(para);
