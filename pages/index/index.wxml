@@ -2,7 +2,7 @@
 
 
 <button wx:if="{{!hasSubmit}}" bindtap="toSubmitChange" style="background: lightblue;">提交</button>
-<button wx:elif="{{tapId != 'diaoRu'}}" open-type="contact" bindcontact="handleContact" style="background-color: #07c160;">下一步</button>
+<button wx:elif="{{tapId != 'diaoRu'}}" open-type="contact" bindtap="handleContact" style="background-color: #07c160;">下一步</button>
 <view>
   <!-- modal弹窗-->
   <modalView show="{{showModal}}" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>

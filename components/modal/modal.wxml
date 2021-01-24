@@ -7,7 +7,7 @@
     <view class='modal-footer'>
       <view wx:if='{{!single}}' class='cancel-btn' bindtap='cancel'>取消</view>
       <view class='confirm-btn'>
-        <button open-type="contact" bindtap='handleContact' style="background-color: white; color: blue;">下一步</button>
+        <button open-type="contact" bindtap='confirm' style="background-color: white; color: blue;">下一步</button>
       </view>
       <!-- <view open-type="contact" class='confirm-btn' bindtap='confirm'>确定 </view> -->
     </view>

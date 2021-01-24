@@ -234,7 +234,8 @@ Page({
   // 点击确定按钮的回调函数
   modalConfirm(e) {
    // 这里面处理点击确定按钮业务逻辑
-    console.log('点击了确定')
+    console.log('点击了确定');
+    this.handleContact(e);
   },
   onFormSubmit(e){
     console.log('表单提交: ', e);
@@ -394,8 +395,7 @@ Page({
     })
   },
   handleContact (e) {
-    console.log(e.detail.path);
-    console.log(e.detail.query);
+    console.log('调用handleContact，', e);
     if(this.data.tapId != 'diaoRu') {
       wx.cloud.callFunction({
         name: 'customerMessage',
