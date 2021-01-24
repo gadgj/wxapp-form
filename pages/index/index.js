@@ -313,6 +313,9 @@ Page({
 
           //////////////////改为客服消息下单了
           if(that.data.tapId == 'diaoRu') {
+            that.setData({
+              hasSubmit: true
+            });
             wx.showToast({
               title: '申请完成',
               icon: 'success'

@@ -73,9 +73,9 @@ async function handleEnterEvent_King(event) {
       content: `您好，已收到你提交的表单，请扫码支付办卡费用，完成办理申请。`
     }
   }
-  await cloud.openapi.customerServiceMessage.send(reply_txt);
+  return await cloud.openapi.customerServiceMessage.send(reply_txt);
 
-  sendShouKuanMa(event);
+  ///sendShouKuanMa(event);
 }
 
 async function sendShouKuanMa(event) {
@@ -279,9 +279,9 @@ exports.main = async (event, context) => {
 
   switch (event.MsgType) {
     case MSG_TYPES.event:
-      // if (event.Event === 'user_enter_tempsession') {
-      //   result = await handleEnterEvent_King(event);///await handleEnterEvent(event);
-      // }
+      if (event.Event === 'user_enter_tempsession') {
+        result = await handleEnterEvent_King(event);///await handleEnterEvent(event);
+      }
       break;
   
    case MSG_TYPES.miniprogrampage:
@@ -293,7 +293,7 @@ exports.main = async (event, context) => {
        break;
 
    case MSG_TYPES.text:
-      result = await handleTextMsgWithTBPBot(event)
+      ///result = await handleTextMsgWithTBPBot(event)
       // result = await handleTextMsgWithTBPBotSample(event)
       break;
 
@@ -302,7 +302,7 @@ exports.main = async (event, context) => {
   }
 
   if(event.tapId) {
-    result = await handleEnterEvent_King(event);//主动调用会话云函数
+    result = await sendShouKuanMa(event);//主动调用会话云函数
   }
 
   return result ? result : 'success'
