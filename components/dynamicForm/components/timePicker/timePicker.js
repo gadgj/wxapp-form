@@ -115,6 +115,7 @@ Component({
     },
     //读取配置项
     readConfig() {
+      console.log('进入配置了')
       let limitEndTime = new Date().getTime();
       let limitStartTime = new Date().getTime() - 1000 * 60 * 60 * 24 * 30;
       if (this.data.config) {

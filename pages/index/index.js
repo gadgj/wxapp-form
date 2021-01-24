@@ -83,12 +83,14 @@ Page({
         // completeTime:true, //显示完整时间, 包含时分秒
         config: {
           endDate: false,///true,
-          dateLimit: true,
-          // initStartTime: "2020-01-01 12:32:44",
+          // dateLimit: true,
+          // limitStartTime: "1950-01-01 00:00:59",//限制选择的时间范围起点
+          // limitEndTime: "2030-01-01 00:00:59",
+          // initStartTime: "2020-01-01 12:32:44",//初始化时间起点
           // initEndTime: "2020-12-01 12:32:44",
-          column: "day",//day、hour、minute、secend
-          limitStartTime: "1950-01-01 00:00:59",
-          limitEndTime: "2050-01-01 00:00:59"
+          column: "day",//day、hour、minute、secend          
+          yearStart: "1950",
+          yearEnd: "2030"
         }
       },
       {
