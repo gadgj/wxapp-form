@@ -221,7 +221,20 @@ Page({
     ],
     toSubmit: Math.random(),    
     tapId: '',
-    hasSubmit: false
+    hasSubmit: false,
+    showModal: false, // 显示modal弹窗
+    single: true, // false 只显示一个按钮，如果想显示两个改为true即可
+    modalMessage: '保存成功'// modal弹窗内容
+  },
+  // 点击取消按钮的回调函数
+  modalCancel(e) {
+    // 这里面处理点击取消按钮业务逻辑
+    console.log('点击了取消')
+  },
+  // 点击确定按钮的回调函数
+  modalConfirm(e) {
+   // 这里面处理点击确定按钮业务逻辑
+    console.log('点击了确定')
   },
   onFormSubmit(e){
     console.log('表单提交: ', e);
@@ -293,14 +306,16 @@ Page({
         async success(res) {
           wx.hideLoading()
           console.log('提交成功', res);
-          wx.showToast({
-            title: '提交成功',
-            icon: 'success'
-          });
+          // wx.showToast({
+          //   title: '提交成功',
+          //   icon: 'success'
+          // });
 
           //////////////////改为客服消息下单了
           that.setData({
-            hasSubmit: true
+            hasSubmit: true,
+            showModal: true,
+            modalMessage: '提交成功'
           });
           return;
           //////////////////改为客服消息下单了 --add by King

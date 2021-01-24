@@ -2,4 +2,14 @@
 
 
 <button wx:if="{{!hasSubmit}}" bindtap="toSubmitChange" style="background: lightblue;">提交</button>
-<button wx:else open-type="contact" bindcontact="handleContact" style="background: lightblue;">下一步</button>
+<button wx:else open-type="contact" bindcontact="handleContact" style="background-color: #07c160;">下一步</button>
+<view>
+  <!-- modal弹窗-->
+  <modalView show="{{showModal}}" bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
+    <view class='modal-content'>
+      <scroll-view scroll-y class='main-content'>
+        <view>{{modalMessage}}</view>
+      </scroll-view>
+    </view>
+  </modalView>
+</view>

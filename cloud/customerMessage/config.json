@@ -1,7 +1,8 @@
 {
   "permissions": {
     "openapi": [
-      "customerServiceMessage.send"
+      "customerServiceMessage.send",
+      "customerServiceMessage.uploadTempMedia"
     ]
   }
 }

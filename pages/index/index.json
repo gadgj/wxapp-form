@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "d-form": "/components/dynamicForm/index"
+    "d-form": "/components/dynamicForm/index",
+    "modalView": "/components/modal/modal"
   }
 }
