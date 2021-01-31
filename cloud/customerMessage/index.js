@@ -42,7 +42,7 @@ async function handleEnterEvent(event) {
 
 ///下载云存储图片  --add by King 2021.01.23
 let downLoad = async(tapId) => {
-    const fileId = tapId == 'xinKa' ? 'cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/zye40.png' : 'cloud://gxwl-0g5grrgie1927a4c.6778-gxwl-0g5grrgie1927a4c-1304647022/zye30.png';
+    const fileId = tapId == 'xinKa' ? 'cloud://suph-4g41pngj0e1a4570.7375-suph-4g41pngj0e1a4570-1304903074/zye40.png' : 'cloud://suph-4g41pngj0e1a4570.7375-suph-4g41pngj0e1a4570-1304903074/zye30.png';
     const res = await cloud.downloadFile({
         fileID: fileId, // 图片的File ID
     })
