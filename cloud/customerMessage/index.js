@@ -26,6 +26,7 @@ const MSG_TYPES = {
 }
 
 const HELP_TIPS = '您可以回复以下内容寻求帮助：\n重置会话请回复：reset\n订机票可回复：订机票'
+const HELP_TIPS_King = '请回复以下内容支付办卡费用，完成办理申请。\n办理新卡请回复: 1\n补卡请回复: 2'
 
 async function handleEnterEvent(event) {
   console.log(event);
@@ -70,7 +71,7 @@ async function handleEnterEvent_King(event) {
     touser: FromUserName,
     msgtype: MSG_TYPES.text,
     text: {
-      content: `您好，已收到你提交的表单，请回复以下内容支付办卡费用，完成办理申请。\n办理新卡请回复: 1\n补卡请回复: 2`
+      content: `您好，已收到你提交的表单，${HELP_TIPS_King}`
     }
   }
   return await cloud.openapi.customerServiceMessage.send(reply_txt);
@@ -117,10 +118,14 @@ async function handleImageMsg(event) {
 async function handleTextMsg_King(event) {
   if (event.Content === '1') {
     event.tapId = 'xinKa';
-  } else {
+    sendShouKuanMa(event);
+  } else if (event.Content === '2') {
     event.tapId = 'buKa';
+    sendShouKuanMa(event);
+  } else {
+    handleEnterEvent_King(event);
   }
-  sendShouKuanMa(event);
+  
 }
 
 async function handleTextMsgWithTBPBot(event) {
