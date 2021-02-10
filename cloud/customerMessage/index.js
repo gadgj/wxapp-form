@@ -26,7 +26,7 @@ const MSG_TYPES = {
 }
 
 const HELP_TIPS = '您可以回复以下内容寻求帮助：\n重置会话请回复：reset\n订机票可回复：订机票'
-const HELP_TIPS_King = '请回复以下内容支付办卡费用(支付时请务必备注姓名+科室)，完成办理申请。\n办理新卡请回复: 1\n补卡请回复: 2'
+const HELP_TIPS_King = '请回复以下内容支付办卡费用(支付时请务必备注姓名+科室)，完成办理申请。\n新办卡请回复: 1\n补办卡请回复: 2'
 
 async function handleEnterEvent(event) {
   console.log(event);
