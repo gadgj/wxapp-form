@@ -14,6 +14,9 @@
 <view class="btns">
   <button type="primary" class="btn" bindtap="toTap" id="xinKa">没有华医网学分卡则需办理新卡</button>
   <button type="primary" class="btn" bindtap="toTap" id="buKa">华医网学分卡丢失则需补卡</button>
-  <button type="primary" class="btn" bindtap="toTap" id="diaoRu">有华医网学分卡需办理调入</button>
+  <button type="primary" class="btn" bindtap="toTap" id="diaoRu">有华医网学分卡则需办理调入</button>
 </view>
 
+<view class="footer">
+  Power by 竿影科技
+</view>

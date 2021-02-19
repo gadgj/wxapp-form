@@ -26,6 +26,7 @@ const MSG_TYPES = {
 }
 
 const HELP_TIPS = '您可以回复以下内容寻求帮助：\n重置会话请回复：reset\n订机票可回复：订机票'
+const HELP_TIPS_King = '请回复以下内容支付办卡费用(支付时请务必备注姓名+科室)，完成办理申请。\n新办卡请回复: 1\n补办卡请回复: 2'
 
 async function handleEnterEvent(event) {
   console.log(event);
@@ -70,7 +71,7 @@ async function handleEnterEvent_King(event) {
     touser: FromUserName,
     msgtype: MSG_TYPES.text,
     text: {
-      content: `您好，已收到你提交的表单，请扫码支付办卡费用，完成办理申请。`
+      content: `您好，已收到你提交的表单，${HELP_TIPS_King}`
     }
   }
   return await cloud.openapi.customerServiceMessage.send(reply_txt);
@@ -112,6 +113,19 @@ async function handleImageMsg(event) {
   }
   reply.image = { media_id: event.MediaId }
   return await cloud.openapi.customerServiceMessage.send(reply)
+}
+
+async function handleTextMsg_King(event) {
+  if (event.Content === '1') {
+    event.tapId = 'xinKa';
+    sendShouKuanMa(event);
+  } else if (event.Content === '2') {
+    event.tapId = 'buKa';
+    sendShouKuanMa(event);
+  } else {
+    handleEnterEvent_King(event);
+  }
+  
 }
 
 async function handleTextMsgWithTBPBot(event) {
@@ -295,15 +309,16 @@ exports.main = async (event, context) => {
    case MSG_TYPES.text:
       ///result = await handleTextMsgWithTBPBot(event)
       // result = await handleTextMsgWithTBPBotSample(event)
+      result = await handleTextMsg_King(event);
       break;
 
     default:
       break;
   }
 
-  if(event.tapId) {
-    result = await sendShouKuanMa(event);//主动调用会话云函数
-  }
+  // if(event.tapId) {
+  //   result = await sendShouKuanMa(event);//主动调用会话云函数
+  // }
 
   return result ? result : 'success'
 }

@@ -22,3 +22,11 @@
 .btn {
   width: 90% !important;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  font-style: italic;
+  color: darkgray;
+}
