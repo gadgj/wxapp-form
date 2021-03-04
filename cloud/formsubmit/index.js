@@ -7,8 +7,10 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async(event, context) => {
   try {
+    const timeStamp = Date.now();///unix timestamp毫秒格式,number类型
+    event._createTime = timeStamp;
+    console.log("event", event);
     return await
-    console.log("event", event),
       //新增数据add
       db.collection('xfkbl').add({
         // data: {
